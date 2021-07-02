@@ -32,6 +32,6 @@ class Timeline extends Component
 
     public function render()
     {
-        return view('livewire.timeline', ['comments' => Comment::latest()->cursorPaginate(10)]);
+        return view('livewire.timeline', ['comments' => Comment::latest()->paginate(20)]);
     }
 }

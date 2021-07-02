@@ -17,6 +17,7 @@
         </style>
 
         @livewireStyles
+        @livewireScripts
 
         <style>
             body {
@@ -27,6 +28,6 @@
     <body class="antialiased">
         @yield('content')
 
-        @livewireScripts
+
     </body>
 </html>

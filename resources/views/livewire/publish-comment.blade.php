@@ -9,7 +9,8 @@
 
     <div class="border border-blue-400 rounded-lg px-8 py-6 mb-8">
         <form wire:submit.prevent="comment">
-            <textarea wire:model="body"
+            <textarea
+                wire:model.defer="body"
                 class="w-full p-4"
                 name="body"
                 id="body"
@@ -32,17 +33,23 @@
                         alt="">
                 </div>
                 <div class="mb-6 items-center">
-                    <input wire:model="attached_image"
-                           class="border border-gray-400 p-2 w-full"
-                           type="file"
-                           name="attached_image"
-                           id="attached_image"
-                           accept="image/*"
+                    <input
+                        wire:change="$emit('fileChosen')"
+                        class="border border-gray-400 p-2 w-full"
+                        type="file"
+                        name="attached_image"
+                        id="attached_image"
+                        accept="image/*"
                     >
                 @error('attached_image')
                     <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                 @enderror
                 </div>
+                @if($attached_image)
+                    <div>
+                        <img src="{{$attached_image}}" alt="">
+                    </div>
+                @endif
                 <button
                     type="submit"
                     class="bg-blue-500 rounded-lg shadow py-2 px-3 text-white"
@@ -52,4 +59,18 @@
             </footer>
         </form>
     </div>
+    <script>
+
+        window.livewire.on('fileChosen', postID => {
+        let inputField = document.getElementById('image')
+        let file = inputField.files[0]
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            window.livewire.emit('fileUpload', reader.result)
+        }
+        reader.readAsDataURL(file);
+        })
+    </script>
 </div>
+
+

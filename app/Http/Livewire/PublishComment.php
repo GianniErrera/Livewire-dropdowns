@@ -15,14 +15,24 @@ class PublishComment extends Component
 
     use WithFileUploads;
 
-    protected $listeners = ['refreshSelf' => '$refresh' ];
+    protected $listeners = [
+        'refreshSelf' => '$refresh',
+        'fileUpload'     => 'handleFileUpload'
+        ];
 
     protected $rules = [
         'body' => 'required|max:160',
     ];
 
+    public function handleFileUpload($imageData)
+    {
+        $this->image = $imageData;
+    }
+
     public function comment()
     {
+        $this->dispatchBrowserEvent('fileChosen');
+
         $validatedData = $this->validate();
         $comment = new Comment();
         $comment->body = $this->body;
@@ -33,11 +43,12 @@ class PublishComment extends Component
         }
         $comment->save();
 
-        $this->body = '';
+
         $this->attached_image = null;
         $this->emitSelf('refreshSelf');
 
         $this->emitTo('timeline', 'refreshComponent');
+        $this->reset(['attached_image', 'body']);
         session()->flash('message', 'Comment added successfully 😁');
     }
 
