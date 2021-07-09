@@ -11,13 +11,18 @@ class Timeline extends Component
     use WithPagination;
 
 
-    protected $listeners = ['refreshComponent' => '$refresh'    ];
+    protected $listeners = ['refreshComponent' => '$refresh', 'andrea'];
 
 
 
     public function delete(Comment $comment)
     {
         $comment->delete();
+    }
+
+    public function andrea(Comment $comment)
+    {
+        $this->resetPage();
     }
 
     public function render()

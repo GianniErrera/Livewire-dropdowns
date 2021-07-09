@@ -15,9 +15,9 @@ class PublishComment extends Component
 
     use WithFileUploads;
 
-    protected $listeners = [
+/*     protected $listeners = [
         'refreshSelf' => '$refresh'
-        ];
+        ]; */
 
     protected $rules = [
         'body' => 'required|max:160',
@@ -40,7 +40,7 @@ class PublishComment extends Component
         $comment->save();
 
         // $this->emitSelf('refreshSelf'); ->questo non serve e non fa funzionare il messaggio flash
-        $this->emitTo('timeline', 'refreshComponent');
+        $this->emitTo('timeline', 'andrea');
         $this->reset(['attached_image', 'body']);
         session()->flash('message', 'Comment added successfully 😁');
     }

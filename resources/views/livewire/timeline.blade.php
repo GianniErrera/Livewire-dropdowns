@@ -39,7 +39,7 @@
             <p class="p-4">No tweets yet</p>
         @endforelse
 
-        {{ $comments->links() }}
+        {{ $comments->links('custom-pagination-tailwind') }}
 
     </div>
 </div>
