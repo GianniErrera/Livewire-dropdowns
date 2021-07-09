@@ -10,7 +10,7 @@
     <div class="border border-blue-400 rounded-lg px-8 py-6 mb-8">
         <form wire:submit.prevent="comment">
             <textarea
-                wire:model.defer="body"
+                wire:model="body"
                 class="w-full p-4"
                 name="body"
                 id="body"
@@ -34,7 +34,7 @@
                 </div>
                 <div class="mb-6 items-center">
                     <input
-                        wire:change="$emit('fileChosen')"
+                        wire:model="attached_image"
                         class="border border-gray-400 p-2 w-full"
                         type="file"
                         name="attached_image"
@@ -59,18 +59,7 @@
             </footer>
         </form>
     </div>
-    <script>
 
-        window.livewire.on('fileChosen', postID => {
-        let inputField = document.getElementById('image')
-        let file = inputField.files[0]
-        let reader = new FileReader();
-        reader.onloadend = () => {
-            window.livewire.emit('fileUpload', reader.result)
-        }
-        reader.readAsDataURL(file);
-        })
-    </script>
 </div>
 
 

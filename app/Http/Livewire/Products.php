@@ -12,7 +12,7 @@ class Products extends Component
 
     public $orderProducts = [];
     public $allProducts = [];
-    PUBLIC $total = 0;
+    public $total = 0;
 
     public function mount()
     {

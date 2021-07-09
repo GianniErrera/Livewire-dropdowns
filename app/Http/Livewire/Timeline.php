@@ -10,20 +10,10 @@ class Timeline extends Component
 {
     use WithPagination;
 
-    public $body;
-    public $attached_image;
-    public $comment;
 
     protected $listeners = ['refreshComponent' => '$refresh'    ];
 
-    protected $rules = [
-        'body' => 'required|max:160',
-    ];
 
-    public function test()
-    {
-        dd('OKKKKKKK');
-    }
 
     public function delete(Comment $comment)
     {

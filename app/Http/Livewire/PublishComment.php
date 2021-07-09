@@ -16,22 +16,17 @@ class PublishComment extends Component
     use WithFileUploads;
 
     protected $listeners = [
-        'refreshSelf' => '$refresh',
-        'fileUpload'     => 'handleFileUpload'
+        'refreshSelf' => '$refresh'
         ];
 
     protected $rules = [
         'body' => 'required|max:160',
     ];
 
-    public function handleFileUpload($imageData)
-    {
-        $this->image = $imageData;
-    }
+
 
     public function comment()
     {
-        $this->dispatchBrowserEvent('fileChosen');
 
         $validatedData = $this->validate();
         $comment = new Comment();
@@ -39,23 +34,17 @@ class PublishComment extends Component
         if($this->attached_image)
         {
         $this->image_path = $this->attached_image->store('images');
+
         $comment->attached_image = $this->image_path;
         }
         $comment->save();
 
-
-        $this->attached_image = null;
-        $this->emitSelf('refreshSelf');
-
+        // $this->emitSelf('refreshSelf'); ->questo non serve e non fa funzionare il messaggio flash
         $this->emitTo('timeline', 'refreshComponent');
         $this->reset(['attached_image', 'body']);
         session()->flash('message', 'Comment added successfully 😁');
     }
 
-    public function test()
-    {
-        dd('OASDFFFFFFFFFFF');
-    }
 
     public function render()
     {
