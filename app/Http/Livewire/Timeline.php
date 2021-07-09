@@ -11,7 +11,7 @@ class Timeline extends Component
     use WithPagination;
 
 
-    protected $listeners = ['refreshComponent' => '$refresh', 'andrea'];
+    protected $listeners = ['refreshComponent' => '$refresh', 'resetPagination'];
 
 
 
@@ -20,7 +20,7 @@ class Timeline extends Component
         $comment->delete();
     }
 
-    public function andrea(Comment $comment)
+    public function resetPagination()
     {
         $this->resetPage();
     }

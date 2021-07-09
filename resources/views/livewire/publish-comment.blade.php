@@ -38,7 +38,7 @@
                         class="border border-gray-400 p-2 w-full"
                         type="file"
                         name="attached_image"
-                        id="attached_image"
+                        id="{{ $counter }}"
                         accept="image/*"
                     >
                 @error('attached_image')

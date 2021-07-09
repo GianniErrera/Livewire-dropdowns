@@ -11,6 +11,7 @@ class PublishComment extends Component
     public $body;
     public $attached_image;
     public $image_path;
+    public $counter = 0;
 
 
     use WithFileUploads;
@@ -40,8 +41,9 @@ class PublishComment extends Component
         $comment->save();
 
         // $this->emitSelf('refreshSelf'); ->questo non serve e non fa funzionare il messaggio flash
-        $this->emitTo('timeline', 'andrea');
+        $this->emitTo('timeline', 'resetPagination');
         $this->reset(['attached_image', 'body']);
+        $this->counter++;
         session()->flash('message', 'Comment added successfully 😁');
     }
 
