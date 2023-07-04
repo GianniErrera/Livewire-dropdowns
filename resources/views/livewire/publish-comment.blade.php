@@ -17,7 +17,8 @@
                 cols="30"
                 rows="10"
                 placeholder="What's up, doc?"
-               >{{old('body')}}</textarea>
+               >{{old('body')}}
+            </textarea>
 
                @error('body')
                     <p class="text-red-500 text-sm mt-2"> {{ $message}}</p>
